@@ -64,11 +64,8 @@ impl<T: Default> Allocator<T> {
             None => println!("Freeing non allocated object."),
         }
     }
-    pub fn get(&mut self, handle: &Handle) -> Result<&mut T, &str> {
-        match self.0.get_mut(handle) {
-            Some(val) => Ok(val),
-            None => Err("Could not get object with specified handle"),
-        }
+    pub fn get(&mut self, handle: &Handle) -> Option<&mut T> {
+        self.0.get_mut(handle)
     }
 }
 // /// FreeMap holds the differnt indices that point to a free memory location
