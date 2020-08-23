@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use std::mem;
 use std::num::NonZeroUsize;
 
-const GENERIC_HANDLE_MAX_SIZE_BITS: usize = mem::size_of::<u32>() * 8 * 2;
+//const GENERIC_HANDLE_MAX_SIZE_BITS: usize = mem::size_of::<u32>() * 8 * 2;
 type Index = Option<std::num::NonZeroUsize>;
 
 #[derive(Copy, Clone, Eq, PartialEq, Hash)]
@@ -18,6 +18,12 @@ impl Handle {
         Handle {
             index: None,
             generation: 0,
+        }
+    }
+    pub fn is_valid(&self) -> bool {
+        match self.index {
+            Some(_) => true,
+            None => false,
         }
     }
     fn invalidate(&mut self) {
